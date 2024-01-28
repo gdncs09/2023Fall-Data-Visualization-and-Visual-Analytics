@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <title>Scatter Plots</title>
+</head>
+<body>
+    <h1>Scatter Plots</h1>
+    <div class="axis-selection">
+        <label for="x-axis-select">X-Axis:</label>
+        <select id="x-axis-select">
+            <option value="sepal length">sepal length</option>
+          <option value="sepal width">sepal width</option>
+          <option value="petal length">petal length</option>
+          <option value="petal width">petal width</option>
+        </select>
+        <label for="y-axis-select">Y-Axis:</label>
+        <select id="y-axis-select">
+            <option value="sepal width">sepal width</option>
+           <option value="sepal length">sepal length</option>
+          <option value="petal length">petal length</option>
+          <option value="petal width">petal width</option>
+        </select>
+  	</div>
+    <div id="scatter-plot"></div>
+
+    <script>
+      var margin = {
+        top: 50,
+        right: 200,
+        bottom: 50,
+        left: 100,
+      },
+      width = 300,
+      height = 300;
+
+      const colorScale = d3
+        .scaleOrdinal()
+        .domain(['Iris-setosa', 'Iris-versicolor', 'Iris-virginica'])
+        .range(['#F9AB40', '#A9E5D5', '#44455B']);
+			
+      const legendData = [
+            {label: 'Iris-setosa', color: '#F9AB40'}, 
+            {label: 'Iris-versicolor', color: '#A9E5D5'},
+  					{label: 'Iris-virginica', color: '#44455B'}
+			];
+      
+      var svg = d3
+        .select('#scatter-plot')
+        .append('svg')
+        .attr('width', width + margin.left + margin.right)
+        .attr('height', height + margin.top + margin.bottom)
+        .append('g')
+        .attr('transform','translate(' + margin.left +',' + margin.top +')');
+			
+      const legendContainer = svg
+      	.append('g')
+      	.attr('class', 'legend-container')
+  			.attr('transform', 'translate(' + (width + 50) + ',' + 10 + ')');
+      
+      const legendItems = legendContainer
+      	.selectAll('g')
+        .data(legendData)
+        .enter()
+        .append('g')
+        .attr('class', 'legend-item')
+        .attr('transform', (d, i) => `translate(0, ${i * 30})`);
+
+        legendItems.append('circle')
+          .attr('r', 6)
+          .attr('cx', 0)
+          .attr('cy', 15)
+          .style('fill', d => d.color);
+
+        legendItems.append('text')
+          .attr('x', 15)
+          .attr('y', 20)
+          .text(d => d.label);
+      
+      var selectedX = document.getElementById('x-axis-select').value;
+      var selectedY = document.getElementById('y-axis-select').value;
+
+      var xScale = d3
+        .scaleLinear()
+        .domain([0, 10])
+        .range([0, width]);
+
+      const labelX = svg
+        .append('text')
+        .attr('class', 'x-label')
+        .attr('x', width / 2)
+        .attr('y', height + 40)
+        .style('text-anchor', 'middle')
+        .text(selectedX);
+
+      svg
+        .append('g')
+        .attr('transform', 'translate(0,' + height + ')')
+        .call(d3.axisBottom(xScale));
+			
+      var yScale = d3
+        .scaleLinear()
+        .domain([0, 10])
+        .range([height, 0]);
+      
+      const labelY = svg
+        .append('text')
+        .attr('class', 'y-label')
+        .attr('transform', 'rotate(-90)')
+        .attr('x', - height / 2)
+        .attr('y', - 30)
+        .style('text-anchor', 'middle')
+        .text(selectedY); 
+      
+      svg
+        .append('g')
+        .call(d3.axisLeft(yScale));
+
+      d3.csv('iris.csv').then(function (data) {
+        data = data.filter(function(row) {
+    			return row.class !== '';
+        });
+        console.log(data);
+        const points = svg
+          .append('g')
+          .selectAll('dot')
+          .data(data)
+          .enter()
+          .append('circle')
+          .attr('cx', function (d) {return xScale(d[selectedX]);})
+          .attr('cy', function (d) {return yScale(d[selectedY]);})
+          .attr('r', 2)
+          .style('fill', function (d) {return colorScale(d.class);});
+
+        document
+          .getElementById('x-axis-select')
+          .addEventListener('change', function () {
+            selectedX = this.value;
+            labelX.text(selectedX); 
+            points.attr('cx', function (d) {return xScale(d[selectedX]);}); 	
+          });
+
+        document
+          .getElementById('y-axis-select')
+          .addEventListener('change', function () {
+            selectedY = this.value;
+            labelY.text(selectedY); 
+            points.attr('cy', function (d) {return yScale(d[selectedY]);});
+          });
+      });
+    </script>
+</body>
+</html>

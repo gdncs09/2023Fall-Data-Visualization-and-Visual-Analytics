@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <title>Horizon Chart</title>
+</head>
+<body>
+    <h1><center>Horizon Chart<center></center></center></h1>
+  	<div class="selection">
+      <label for="display"><strong> Display: </strong>
+      <select id="display" name="display" onchange="selectDisplay(); renderChart();">
+        <option value="All" selected>All</option>
+        <option value="SO2">SO2</option>
+        <option value="NO2">NO2</option>
+        <option value="O3">O3</option>
+        <option value="CO">CO</option>
+        <option value="PM10">PM10</option>
+        <option value="PM2.5">PM2.5</option>
+      </select>
+        
+      <label for="year"><strong> Year: </strong>
+      <select id="year" name="year" onchange="selectYear(); renderChart();">
+      	<option value="2017" selected>2017</option>
+        <option value="2018">2018</option>
+        <option value="2019">2019</option>
+      </select>
+        
+      <label for="bands"><strong> Bands: </strong>
+      <select id="bands" name="bands" onchange="selectBands(); renderChart();">
+        <option value="1" selected>1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </div>
+      
+      </select>
+  
+    <div id="horizon-chart"></div>
+
+    <script src="109550184.js"> </script>
+          
+</body></html>

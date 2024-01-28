@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+  	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <title>Parallel Coordinate Plots</title>
+</head>
+<style type="text/css">
+  	.axes-container {
+      min-height: 50px;
+    }
+    .container-title {
+      width: 430px;
+      font-weight: bold;
+      font-size: 14px;
+      text-align: center;
+      
+    }
+    .axis {
+      width: 95px;
+      height: 10px;
+      border-radius: .20rem;
+      padding: .25rem .1rem;
+      margin: .15rem;
+      background-color: rgba(0,0,0,.03);
+      border: 1px solid rgba(0,0,0,.125);
+      text-align: center;
+      font-size: 12px;
+      display: inline-block;
+    }
+    .axes-placeholder {
+      border: 1px dotted black;
+      border-radius: .20rem;
+      margin: .15rem;
+      width: 95px;
+      height: 10px;
+      display: inline-block;
+    }
+    .connection {
+      fill: none;
+    }
+    .Iris-setosa {
+      stroke: red;
+    }
+    .Iris-versicolor {
+      stroke: yellow;
+    }
+    .Iris-virginica {
+      stroke: blue;
+    }
+</style> 
+<body>
+    <h1>Parallel Coordinate Plots</h1>
+    <div class="options">
+      <div class="container-title">Drag and drop to change the order of the axis</div>
+              <div id="axes-order" class="axes-container">
+                <div class="axis" data-axis="sepal length">Sepal length</div>
+                <div class="axis" data-axis="sepal width">Sepal width</div>
+                <div class="axis" data-axis="petal length">Petal length</div>
+                <div class="axis" data-axis="petal width">Petal width</div>
+              </div>
+            </div>
+    </div> 
+		<div id="parallel-plot"> </div> 
+    <script src="109550184.js"> </script>
+</body>
+</html>

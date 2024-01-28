@@ -1,0 +1,32 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <title>Stacked Bar Charts</title>
+</head>
+  
+<body>
+    <h1><center>Stacked Bar Charts<center></center></center></h1>
+   	<div class="selection">
+      <label for="selection"> Sorted by: </label>
+      <select id="element">
+      	<option value="scores_overall">Overall Scores</option>
+        <option value="scores_teaching_rank">Teaching</option>
+        <option value="scores_research_rank">Research</option>
+        <option value="scores_citations_rank">Citations</option>
+        <option value="scores_industry_income_rank">Industry income</option>
+        <option value="scores_international_outlook_rank">International outlook</option>
+      </select> 
+      
+      <select id="mode">
+        <option value="descending">Descending</option>
+      	<option value="ascending">Ascending</option>  
+      </select> 
+      <button class="button" id="bt">Enter</button>
+    </div>
+      
+    <div id="stacked-bar-charts"></div>
+
+    <script src="109550184.js"> </script>
+
+</body></html>
